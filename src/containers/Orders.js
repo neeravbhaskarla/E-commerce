@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import OrderItem from '../components/OrderItem/OrderItem'
 const DUMMY_PRODUCTS = [
     {

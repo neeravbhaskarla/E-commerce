@@ -7,7 +7,7 @@ const ProductItem = (props) =>{
     return(
             <div className="p-4">  
                 <div className="rounded-3xl overflow-hidden shadow-lg font-roboto space-y-1 flex-stretch flex-col pb-7 hover:bg-gray-50 transition-colors duration-700 cursor-pointer" style={{width: '320px'}}>
-                    <img className="w-full" src={props.img} style={{height: '220px'}}/>
+                    <img className="w-full" src={props.img} style={{height: '220px'}} alt=""/>
                     <div className="px-9 py-4 space-y-2 flex flex-col items-start">
                         <div className="font-normal text-xl text-gray-800 capitalize">{props.title}</div>
                         <div className='font-light text-gray-400 text-sm overflow-hidden' style={{flex: '0 1 22px'}}>{props.description}</div>
