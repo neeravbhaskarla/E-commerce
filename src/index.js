@@ -3,8 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import './assets/style/main.css'
 import App from './App';
-
+import {StoreContextProvider} from './store/use-context'
 ReactDOM.render(
-    <App />,
+  <StoreContextProvider>
+    <App />
+  </StoreContextProvider>,
   document.getElementById('root')
-);
+  );

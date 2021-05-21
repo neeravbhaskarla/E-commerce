@@ -1,13 +1,15 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import ShoppingLogo from '../assets/svg/Logo.svg'
 import SearchIcon from '@material-ui/icons/Search'
 import CartIcon from '@material-ui/icons/ShoppingCartOutlined'
 import FavIcon from '@material-ui/icons/Favorite'
 import ProfileIcon from '@material-ui/icons/AccountCircle'
 import { Link } from 'react-router-dom'
+import {StoreContext} from '../store/use-context'
 
 const Header=()=>{
-    const [isLoggedIn, setIsLoggedIn] = useState(true)
+    const storeCtx = useContext(StoreContext)
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
     return (
         <nav className='bg-black h-14 flex justify-between items-center font-sans'>
             <Link to='/'>
@@ -26,7 +28,7 @@ const Header=()=>{
                 </Link>
                 <Link to='/checkout' className="flex flex-row hover:text-gray-300 text-white h-10 p-1 items-center duration-700">
                     <CartIcon/>
-                    <span className='text-xs text-white font-bold px-1 text-center font-roboto'>3</span>
+                    <span className='text-xs text-white font-bold px-1 text-center font-roboto'>{storeCtx.cart.length}</span>
                 </Link>
             </div>
         </nav>
