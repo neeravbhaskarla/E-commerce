@@ -4,14 +4,19 @@ import StarOutlineIcon from '@material-ui/icons/StarBorderOutlined'
 import FavIcon from '@material-ui/icons/Favorite'
 import FavOutLineIcon from '@material-ui/icons/FavoriteBorderOutlined'
 import AddToCart from  '@material-ui/icons/AddShoppingCart'
+import RemoveFromCart from '@material-ui/icons/RemoveShoppingCartOutlined'
 import {StoreContext} from '../../store/use-context'
 const ProductItem = (props) =>{
     const storeCtx = useContext(StoreContext)
     const onAddToCart =(item)=>{
         storeCtx.addToCart(item)
+        // console.log(storeCtx.cart)
     }
     const onRemoveWishList=(id)=>{
         storeCtx.removeFromWishList(id)
+    }
+    const onRemoveCartList=(id)=>{
+        storeCtx.removeFromCart(id)
     }
     const onAddWishlist=(item)=>{
         storeCtx.addToWishList(item)
@@ -36,7 +41,7 @@ const ProductItem = (props) =>{
                         </div>
                         <div className="flex flex-row justify-between items-center">
                                 {/* <button className="bg-white hover:bg-gray-700 text-black hover:text-white text-xs px-2 py-2 font-roboto font-normal transition-colors duration-700">Add to Cart</button> */}
-                                <AddToCart className="ml-2 hover:text-gray-600" style={{width: "25px"}} onClick={()=>onAddToCart(props.item)}/>
+                                {storeCtx.cart.find(item=>item.id===props.id)?<RemoveFromCart className="ml-2 hover:text-gray-600" style={{width: "25px"}} onClick={()=>onRemoveCartList(props.id)}/>:<AddToCart className="ml-2 hover:text-gray-600" style={{width: "25px"}} onClick={()=>onAddToCart(props.item)}/>}
                                 <div className="text-xs px-2">
                                     {storeCtx.wishList.find(item=>item.id===props.id)?
                                         <FavIcon className="text-red-600" style={{width: "20px"}} 

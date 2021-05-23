@@ -1,16 +1,27 @@
-import React, { Fragment, useContext } from 'react'
+import React, { Fragment, useContext, useEffect, useCallback} from 'react'
 import CloseIcon from '@material-ui/icons/Close'
 import {StoreContext} from '../store/use-context'
 const Checkout = () =>{
     const storeCtx = useContext(StoreContext)
-    const totalPrice = (storeCtx.cart.length!==0)?storeCtx.cart.map(item=>item.price).reduce((sum,total)=>sum+total):0
+    let totalPrice =(storeCtx.cart.length!==0)?storeCtx.cart.map(item=>item.price*item.quantity).reduce((sum,total)=>sum+total):0
+    useEffect(()=>{
+         totalPrice = (storeCtx.cart.length!==0)?storeCtx.cart.map(item=>item.price*item.quantity).reduce((sum,total)=>sum+total):0
+    },[storeCtx.incQuantity, storeCtx.decQuantity])
     return (
         <Fragment>
             <h1 className="text-2xl font-poppins mt-10 mb-14 text-center font-semibold">Shopping Cart</h1>
             <div className="flex flex-row justify-between mx-20">
                 <div className="flex flex-col space-y-5" style={{width: '50vw'}}>
                     {storeCtx.cart.map(item=>(
-                        <Order key={item.id} title={item.title} description={item.description} removeFromCart={()=>storeCtx.removeFromCart(item.id)} img={item.img} price={item.price}/>
+                        <Order key={item.id} 
+                            id={item.id}
+                            item={item}
+                            title={item.title} 
+                            description={item.description} 
+                            removeFromCart={()=>storeCtx.removeFromCart(item.id)} 
+                            img={item.img} 
+                            quantity={item.quantity}
+                            price={item.price}/>
                     ))}
                 </div>
                 <div className="flex flex-col p-10 space-y-8 font-roboto" style={{border: '1px solid #ccc', height: '400px'}}>
@@ -34,7 +45,7 @@ const Checkout = () =>{
                             </div>
                         </div>
                         <div>
-                            <button className="bg-black text-white px-32 py-3 mt-12">Order</button>
+                            <button className="bg-black text-white px-32 py-3 mt-12" onClick={()=>storeCtx.placeOrder()}>Order</button>
                         </div>
                 </div>
             </div>
@@ -43,8 +54,16 @@ const Checkout = () =>{
     )
 }
 const Order=(props)=>{
+    const storeCtx = useContext(StoreContext)
+    let quantity = storeCtx.cart.find(item=>item.id===props.id).quantity
+    const incrementHandler=(item)=>{
+        storeCtx.incQuantity(item)
+    }
+    const decrementHandler=(item)=>{
+        storeCtx.decQuantity(item)
+    }
     return(
-        <article className="flex flex-row space-x-6 overflow-hidden hover:bg-gray-100 transition-colors duration-700" style={{border : '1px solid #ccd'}}>
+        <article className="flex flex-row space-x-6 overflow-hidden hover:bg-gray-50 transition-colors duration-700" style={{border : '1px solid #ccd'}}>
             <div>
                 <img src={props.img} alt="" style={{height: '150px', width: '250px'}}/>
             </div>
@@ -57,7 +76,12 @@ const Order=(props)=>{
                 </div>
             </div>  
             <div className="flex flex-col justify-between p-2">
-                <div className="font-roboto text-xl text-gray-500 flex justify-end p-2">${props.price}</div>
+                <div className="font-roboto text-xl text-gray-500 flex justify-end p-2 mx-2">${props.price}</div>
+                <div className="flex flex-row space-x-2 mx-4">
+                <button className="px-1 font-medium" onClick={()=>decrementHandler(props.item)}>-</button>
+                <p>{quantity}</p>
+                <button className="px-1 font-medium" onClick={()=>incrementHandler(props.item)}>+</button>
+                </div>
                 <button className="flex flex-row items-center align-middle font-poppins p-2 text-xs font-normal text-gray-900" onClick={props.removeFromCart}><CloseIcon style={{height: '15px', width: '15px'}}/> Remove</button>
             </div>
         </article>

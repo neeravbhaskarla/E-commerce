@@ -9,7 +9,6 @@ import {StoreContext} from '../store/use-context'
 
 const Header=()=>{
     const storeCtx = useContext(StoreContext)
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
     return (
         <nav className='bg-black h-14 flex justify-between items-center font-sans'>
             <Link to='/'>
@@ -20,7 +19,7 @@ const Header=()=>{
                     <input type="text" className='h-9 px-2 text-sm w-80 text-gray-500'/>
                     <SearchIcon className='bg-gray-100 w-full h-12 px-1 hover:bg-gray-300' style={{height: "36px"}}/>
                 </div>
-                <Link to={!isLoggedIn?'/signin':'/profile'} className="flex flex-col hover:text-gray-300 text-white h-10 p-1 mx-1 duration-700 justify-center align-middle">
+                <Link to={!storeCtx.isSigned?'/signin':'/profile'} className="flex flex-col hover:text-gray-300 text-white h-10 p-1 mx-1 duration-700 justify-center align-middle">
                     <span className='text-sm font-normal'><ProfileIcon/></span>
                 </Link>
                 <Link to='/wishlist' className="flex flex-col text-white hover:text-red-600 h-10 p-1 mx-1 duration-700 justify-center align-middle">

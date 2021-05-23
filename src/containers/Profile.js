@@ -1,8 +1,23 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import UserProfile from '../assets/svg/profile.svg'
 import LogoutIcon from '@material-ui/icons/ExitToApp'
-import {Link} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
+import {StoreContext} from '../store/use-context'
 const Profile=()=>{
+    const history = useHistory()
+    const storeCtx = useContext(StoreContext)
+    const logOutHandler = () =>{
+      storeCtx.logOut()
+      history.push('/signin')
+    }
+    let Orders=[]
+    for(let key in storeCtx.orders){
+       Orders.push(storeCtx.orders[key])
+    }
+    let OrdersLength = Orders.map(item=>(
+      item.items.length
+    ))
+    let Length = OrdersLength.length!==0?OrdersLength.reduce((s,t)=>s+t):0
     return(
         <>
         <main>
@@ -31,35 +46,32 @@ const Profile=()=>{
                       <div className="flex justify-center py-4 lg:pt-4 pt-8">
                         <div className="mr-4 p-3 text-center">
                           <span className="text-xl font-bold block uppercase tracking-wide text-gray-700">
-                            22
+                            {Length}
                           </span>
-                          <span className="text-sm text-gray-500">Orders</span>
+                          <span className="text-sm text-gray-500">Total Orders</span>
                         </div>
                       </div>
                     </div>
                   </div>
                   <div className="text-center mt-12 ml-5">
-                    <h3 className="text-4xl font-semibold leading-normal text-gray-800 mb-2">
-                      Neerav
+                    <h3 className="text-4xl font-semibold leading-normal text-gray-800 mb-2 capitalize">
+                      {storeCtx.userDetails.name}
                     </h3>
-                    <div className="text-sm leading-normal mt-0 mb-2 text-gray-400 font-bold uppercase">
-                      Customer
+                    <div className="text-sm leading-normal mt-0 mb-2 text-gray-400 font-bold lowercase">
+                      {storeCtx.userDetails.email}
                     </div>
                   </div>
                   <div className="mt-10 py-10 border-t border-gray-300 text-center">
                     <div className="flex flex-wrap justify-center">
                       <div className="w-full lg:w-1/2 px-4">
-                        <p className="mb-4 text-lg leading-relaxed text-gray-800">
-                          An artist of considerable range, Jenna the name taken by
-                          Melbourne-raised, Brooklyn-based Nick Murphy writes,
-                          performs and records all of his own music, giving it a
-                          warm, intimate feel with a solid groove structure. An
-                          artist of considerable range.
+                        <h3 className="mb-6 text-lg leading-relaxed text-black font-roboto -mx-20 font-light text-left">Address</h3>
+                        <p className="mb-4 text-md leading-relaxed text-gray-800">
+                          {storeCtx.userDetails.address}
                         </p>
                       </div>
                     </div>
                   <div className="mt-10 ml-5 flex justify-center">
-                      <button className="flex flex-row justify-items-center align-middle">
+                      <button className="flex flex-row justify-items-center align-middle" onClick={logOutHandler}>
                           <div className="text-red-600">Logout</div><span className="ml-1"><LogoutIcon/></span>
                       </button>
                   </div>

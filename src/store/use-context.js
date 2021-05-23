@@ -1,4 +1,4 @@
-import React,{useCallback, useEffect, useState} from 'react'
+import React,{ useCallback, useEffect, useState} from 'react'
 // const DUMMY_PRODUCTS = {
 //     "Computers and Accessories":[
 //         {
@@ -84,7 +84,7 @@ import React,{useCallback, useEffect, useState} from 'react'
 //             orderedDate: new Date(Date.now()).toDateString()
 //         },
 //         {
-//             id:'Clothes_3',
+    //             id:'Clothes_3',
 //             title: 'Keyboard',
 //             rating: 1,
 //             img: 'https://images.pexels.com/photos/841228/pexels-photo-841228.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
@@ -94,18 +94,18 @@ import React,{useCallback, useEffect, useState} from 'react'
 //             orderedDate: new Date(Date.now()).toDateString()
 //         },
 //         {
-//             id:'Clothes_4',
-//             title: 'Keyboard',
-//             rating: 1,
-//             img: 'https://images.pexels.com/photos/841228/pexels-photo-841228.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-//             price: 59,
-//             inStock: true ,
-//             description: 'A mechanical keyboard',
-//             orderedDate: new Date(Date.now()).toDateString()
+    //             id:'Clothes_4',
+    //             title: 'Keyboard',
+    //             rating: 1,
+    //             img: 'https://images.pexels.com/photos/841228/pexels-photo-841228.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
+    //             price: 59,
+    //             inStock: true ,
+    //             description: 'A mechanical keyboard',
+    //             orderedDate: new Date(Date.now()).toDateString()
 //         },
 //         {
-//             id:'Clothes_5',
-//             title: 'Keyboard',
+    //             id:'Clothes_5',
+    //             title: 'Keyboard',
 //             rating: 1,
 //             img: 'https://images.pexels.com/photos/841228/pexels-photo-841228.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
 //             price: 59,
@@ -115,22 +115,43 @@ import React,{useCallback, useEffect, useState} from 'react'
 //         }
 //     ]
 // }
+const authToken = "EioAXuvhQ4iYkqg1tb85vOD6iMVkTL2vlaQuWplR"
 export const StoreContext = React.createContext({
+    userId: '',
+    userDetails: {},
+    token: '',
     items:{},
     cart:[],
     wishList:[],
+    isSigned: null,
+    authToken: null,
+    orders:[],
+    setUserData:()=>{},
+    setSignIn: (value)=>{},
+    logOut:()=>{},
+    checkStatus: ()=>{},
     addToCart: (item)=>{},
     removeFromCart: (id)=>{},
     addToWishList: (item)=>{},
     removeFromWishList: (id)=>{},
-    setItems: (item)=>{}
+    setItems: (item)=>{},
+    getUserData: (id) =>{},
+    fetchOrders: () =>{},
+    placeOrder: ()=>{},
+    incQuantity: (item)=>{},
+    decQuantity: (item)=>{}
 })
-
 export const StoreContextProvider = (props)=>{
-    
     const [items, setItemsState] = useState({})
+    const [userDetails, setUserDetails] = useState({})
     const [cart, setCartState] = useState([])
     const [wishList, setWishListState] = useState([])
+    const [isSignIn, setIsSignIn] = useState(false)
+    const [uId, setUserId] = useState('')
+    const [token, setToken] = useState('')
+    const [orders, setOrders] = useState([])
+    const [expTime, setexpTime ] = useState('')
+
 
     // const onAddHandler =()=>{
     //     const getData = async()=>{
@@ -144,10 +165,30 @@ export const StoreContextProvider = (props)=>{
     //       }
     //     getData()
     // }
+    const checkUserHandler=useCallback(()=>{
+        if(localStorage.getItem('token')!==null){
+            setexpTime(localStorage.getItem('expirationTime'))
+            setUserId(localStorage.getItem('userId'))
+            setToken(localStorage.getItem('token'))
+            setIsSignIn(true)
+        }
+    },[setUserId,setToken,setIsSignIn])
     const addToCartHandler =(item)=>{
         // onAddHandler()
         let dupCart = cart
-        dupCart=dupCart.concat(item)
+        const itemIndex = dupCart.findIndex(ele=>ele.id===item.id)
+        if(itemIndex!==-1){
+            dupCart[itemIndex] = {
+                ...item,
+                quantity: dupCart[itemIndex].quantity+1
+            }
+        }
+        else{
+            dupCart = dupCart.concat({
+                ...item,
+                'quantity': 1,
+            })
+        }
         setCartState(dupCart)
     }
 
@@ -169,19 +210,155 @@ export const StoreContextProvider = (props)=>{
         setWishListState(dupWishList)
     }
 
-    const onItemsSetHandler = (items) =>{
+    const onItemsSetHandler = useCallback((items) =>{
         setItemsState(items)
+    },[])
+
+    const setUserData = useCallback((data)=>{
+        setUserDetails(data)
+    },[setUserDetails])
+
+    const fetch_users = async(id)=>{
+        let UserName, UserEmail, UserAddress
+            const queryParams = '?auth=' + authToken + '&orderBy="userId"&equalTo="' + id + '"';
+            const res = await fetch('https://e-commerce-597b0-default-rtdb.firebaseio.com/users.json' + queryParams)
+            const data = await res.json()
+            for(let i in data){
+                UserName = await data[i].name
+                UserEmail = await data[i].email
+                UserAddress = await data[i].address
+            }
+        setUserDetails({
+            name: UserName,
+            email: UserEmail,
+            address: UserAddress
+        })
+
     }
 
+    const logoutHandler = () =>{
+        localStorage.removeItem('userId')
+        localStorage.removeItem('token')
+        localStorage.removeItem('expirationTime')
+        setItemsState({})
+        setUserDetails({})
+        setCartState([])
+        setWishListState([])
+        setIsSignIn(false)
+        setUserId('')
+        setToken('')
+        setexpTime ('')
+
+    }
+    const signInHandler = useCallback((value)=>{
+        setIsSignIn(value)
+    },[setIsSignIn])
+
+    const placeOrderHandler=async()=>{
+        const post_order=async()=>{
+            const response = await fetch('https://e-commerce-597b0-default-rtdb.firebaseio.com/orders.json?auth='+authToken,{
+                method: 'POST',
+                body: JSON.stringify({
+                    items: cart,
+                    userId: uId
+                }),
+                headers:{
+                    'Content-type': 'application/json'
+                }
+            }).catch(err=>{
+                throw new Error('Something Went wrong')
+            })
+            if(!response.ok){
+                throw new Error('Server error')
+            }
+        }
+        await post_order().catch(err=>{
+            alert(err)
+        })
+    }
+
+    const fetch_orders = async() =>{
+        const queryParams = '?auth=' + authToken + '&orderBy="userId"&equalTo="' + uId + '"';
+        // const queryParams = '?auth=' + authToken;
+        const order_fetch = async()=>{
+            const response = await fetch('https://e-commerce-597b0-default-rtdb.firebaseio.com/orders.json' + queryParams)
+            .catch(err=>{
+                throw new Error('Something went wrong')   
+            })
+            if(!response.ok){
+                throw new Error('Server Error')
+            }
+            const data = await response.json()
+            let fetchedOrders=[]
+            for(let key in data){
+                fetchedOrders.push({
+                    ...data[key],
+                    id: key
+                })
+            }
+            setOrders(fetchedOrders)
+        }
+        await order_fetch().catch(err=>{
+            alert(err)
+        })
+            // .then(res=>{
+            //     let fetchedOrders=[]
+            //     for(let key in res.data){
+            //         fetchedOrders.push({
+            //             ...res.data[key], //Contains the object file in the unique key
+            //             id: key //Contains the unique Id
+            //         })
+            //     }
+            //     console.log(fetchedOrders)
+            //     setOrders(fetchedOrders)
+            // })
+            // .catch(err=>{
+            //     alert('Something went wrong')
+            // })
+    }
+    const incQuantityHandler=(item)=>{
+        let dupCart = cart
+        const itemIndex = dupCart.findIndex(ele=>ele.id===item.id)
+        setCartState(prev=>{
+            prev[itemIndex].quantity = prev[itemIndex].quantity+1
+            return [...prev]
+        })
+    }
+    const decQuantityHandler=(item)=>{
+        let dupCart = cart
+        const itemIndex = dupCart.findIndex(ele=>ele.id===item.id)
+        if(dupCart[itemIndex].quantity>1){
+            setCartState(prev=>{
+                prev[itemIndex].quantity = prev[itemIndex].quantity-1
+                return [...prev]
+            })
+        }
+        return
+    }
     const contextValue ={
+        userId: uId,
+        token: token,
         items: items,
         cart: cart,
         wishList: wishList,
+        orders: orders,
+        isSigned: isSignIn,
+        authToken,
+        userDetails,
+        setUserData: setUserData,
+        setSignIn: signInHandler,
+        logOut: logoutHandler,
+        checkStatus: checkUserHandler,
         addToCart: addToCartHandler,
         removeFromCart: removeFromCartHandler,
         addToWishList: addToWishListHandler,
         removeFromWishList: removeFromWishListHandler,
-        setItems: onItemsSetHandler
+        setItems: onItemsSetHandler,
+        getUserData: fetch_users,
+        fetchOrders: fetch_orders,
+        placeOrder: placeOrderHandler,
+        incQuantity: incQuantityHandler,
+        decQuantity: decQuantityHandler 
     }
     return(
         <StoreContext.Provider value={contextValue}>

@@ -11,7 +11,7 @@ const MainPage=()=>{
             <div className="mt-10 mb-20" key={item}>
                 <div className="flex flex-col">
                     <div className="font-poppins font-medium text-2xl text-gray-600 flex align-bottom justify-items-start mx-12">{item}</div>
-                    <ScrollContainer className="flex flex-col items-center md:flex-row space-x-2 overflow-x-hidden my-3 px-20">
+                    <ScrollContainer className="flex flex-col items-center md:flex-row space-x-2 overflow-x-hidden my-3 px-20 mr-2">
                         {[...storeCtx.items[item]].slice(0,6).map(product=>(
                             <div className="flex flex-col" key={product.id}>
                                 <ProductItem key={product.id} 
@@ -25,8 +25,10 @@ const MainPage=()=>{
                                     description={product.description}/>
                             </div>
                         ))}
-                        <div className='p-3 rounded-full flex align-middle justify-items-center bg-gray-100 hover:bg-gray-300 cursor-pointer'>
-                            <ArrowForwardIcon/>
+                        <div className="flex flex-col">
+                            <div className='p-3 rounded-full flex align-middle justify-items-center bg-gray-100 hover:bg-gray-300 cursor-pointer'>
+                                <ArrowForwardIcon/>
+                            </div>
                         </div>
                     </ScrollContainer>
                 </div>
