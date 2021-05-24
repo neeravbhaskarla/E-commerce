@@ -32,6 +32,7 @@ const SignUp = () =>{
                 }
             }).catch(err=>{
                 alert(err.message)
+                return
             })
             if(!response.ok){
                 throw new Error("Something went wrong")
@@ -58,6 +59,7 @@ const SignUp = () =>{
         }
         fetch_data().catch(error=>{
             alert(error.message)
+            return
         })
         storeCtx.setSignIn(true)
         setIsLoading(false)

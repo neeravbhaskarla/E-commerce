@@ -180,12 +180,14 @@ export const StoreContextProvider = (props)=>{
         if(itemIndex!==-1){
             dupCart[itemIndex] = {
                 ...item,
+                orderedDate: new Date(Date.now()).toDateString(),
                 quantity: dupCart[itemIndex].quantity+1
             }
         }
         else{
             dupCart = dupCart.concat({
                 ...item,
+                orderedDate: new Date(Date.now()).toDateString(),
                 'quantity': 1,
             })
         }
@@ -248,19 +250,24 @@ export const StoreContextProvider = (props)=>{
         setUserId('')
         setToken('')
         setexpTime ('')
-
     }
+
     const signInHandler = useCallback((value)=>{
         setIsSignIn(value)
     },[setIsSignIn])
 
     const placeOrderHandler=async()=>{
+        if(cart.length === 0){
+            alert('No items in the cart')
+            return
+        }
         const post_order=async()=>{
             const response = await fetch('https://e-commerce-597b0-default-rtdb.firebaseio.com/orders.json?auth='+authToken,{
                 method: 'POST',
                 body: JSON.stringify({
                     items: cart,
-                    userId: uId
+                    userId: uId,
+                    address: userDetails.address
                 }),
                 headers:{
                     'Content-type': 'application/json'
@@ -272,14 +279,16 @@ export const StoreContextProvider = (props)=>{
                 throw new Error('Server error')
             }
         }
-        await post_order().catch(err=>{
+        await post_order().then(
+            setCartState([])
+        ).catch(err=>{
             alert(err)
         })
+        await fetch_orders()
     }
 
     const fetch_orders = async() =>{
         const queryParams = '?auth=' + authToken + '&orderBy="userId"&equalTo="' + uId + '"';
-        // const queryParams = '?auth=' + authToken;
         const order_fetch = async()=>{
             const response = await fetch('https://e-commerce-597b0-default-rtdb.firebaseio.com/orders.json' + queryParams)
             .catch(err=>{
@@ -301,20 +310,6 @@ export const StoreContextProvider = (props)=>{
         await order_fetch().catch(err=>{
             alert(err)
         })
-            // .then(res=>{
-            //     let fetchedOrders=[]
-            //     for(let key in res.data){
-            //         fetchedOrders.push({
-            //             ...res.data[key], //Contains the object file in the unique key
-            //             id: key //Contains the unique Id
-            //         })
-            //     }
-            //     console.log(fetchedOrders)
-            //     setOrders(fetchedOrders)
-            // })
-            // .catch(err=>{
-            //     alert('Something went wrong')
-            // })
     }
     const incQuantityHandler=(item)=>{
         let dupCart = cart

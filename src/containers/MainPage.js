@@ -1,4 +1,5 @@
-import React, { Fragment, useContext , useReducer} from 'react'
+import React, { Fragment, useContext } from 'react'
+import {Link} from 'react-router-dom'
 import Hero from '../components/MainPage/Hero'
 import ProductItem from '../components/ProductItem/ProductItem'
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
@@ -26,9 +27,11 @@ const MainPage=()=>{
                             </div>
                         ))}
                         <div className="flex flex-col">
+                        <Link to={`/category/${item}`}>
                             <div className='p-3 rounded-full flex align-middle justify-items-center bg-gray-100 hover:bg-gray-300 cursor-pointer'>
-                                <ArrowForwardIcon/>
+                               <ArrowForwardIcon/>
                             </div>
+                        </Link>
                         </div>
                     </ScrollContainer>
                 </div>

@@ -1,12 +1,18 @@
 import React, { Fragment, useContext, useEffect, useCallback} from 'react'
+import {useHistory} from 'react-router'
 import CloseIcon from '@material-ui/icons/Close'
 import {StoreContext} from '../store/use-context'
 const Checkout = () =>{
     const storeCtx = useContext(StoreContext)
+    const history = useHistory()
     let totalPrice =(storeCtx.cart.length!==0)?storeCtx.cart.map(item=>item.price*item.quantity).reduce((sum,total)=>sum+total):0
     useEffect(()=>{
          totalPrice = (storeCtx.cart.length!==0)?storeCtx.cart.map(item=>item.price*item.quantity).reduce((sum,total)=>sum+total):0
     },[storeCtx.incQuantity, storeCtx.decQuantity])
+    const placeOrderHandler =() =>{
+        storeCtx.placeOrder()
+        history.push('/')
+    }
     return (
         <Fragment>
             <h1 className="text-2xl font-poppins mt-10 mb-14 text-center font-semibold">Shopping Cart</h1>
@@ -45,7 +51,7 @@ const Checkout = () =>{
                             </div>
                         </div>
                         <div>
-                            <button className="bg-black text-white px-32 py-3 mt-12" onClick={()=>storeCtx.placeOrder()}>Order</button>
+                            <button className="bg-black text-white px-32 py-3 mt-12" onClick={placeOrderHandler}>Order</button>
                         </div>
                 </div>
             </div>

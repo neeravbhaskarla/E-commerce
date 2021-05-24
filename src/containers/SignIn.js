@@ -27,23 +27,28 @@ const SignIn = () =>{
                     'Content-type': 'application/json'
                 }
             }).catch(err=>{
-                alert(err.message)
+                throw new Error(err)
             })
-            if(!response.ok){
-                throw new Error("Something went wrong")
-            }
             const data = await response.json()
+            if(!response.ok){
+                throw new Error(data.error.message)
+            }
             localStorage.setItem('userId', data.localId)
             localStorage.setItem('token', data.idToken)
             localStorage.setItem('expirationTime', data.expiresIn)
             storeCtx.getUserData(data.localId)
-        }
-        userSignIn().catch(error=>{
-        alert(error.message)
+        }   
+        userSignIn()
+        .then(res=>{
+            setIsLoading(false)
+            storeCtx.setSignIn(true)
+            history.push('/')
         })
-        setIsLoading(false)
-        storeCtx.setSignIn(true)
-        history.push('/')
+        .catch(error=>{
+            alert(error.message)
+            setIsLoading(false)
+            return
+        })
     }
 
     let form = (
@@ -74,7 +79,7 @@ const SignIn = () =>{
 
     return(
         <div>
-            {isLoading?<ClipLoader/>:form}
+            {isLoading?<ClipLoader size={100} css={`position: absolute; top:40%;`}/>:form}
         </div>
     )
 }

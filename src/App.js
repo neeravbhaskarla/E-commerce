@@ -9,6 +9,8 @@ import Checkout from './containers/Checkout'
 import Orders from './containers/Orders';
 import WishList from './containers/Wishlists';
 import Profile from './containers/Profile';
+import ProductDetail from './components/ProductDetail/ProductDetail'
+import CategoryDetail from './components/CategoryDetail/CategoryDetail'
 import { useEffect } from 'react';
 import {StoreContext} from './store/use-context'
 function App() {
@@ -24,11 +26,12 @@ function App() {
     }
     getData()
     storeCtx.checkStatus()
-    storeCtx.fetchOrders()
   },[storeCtx.isSigned])
-
+  useEffect(()=>{
+    storeCtx.fetchOrders()
+  },[storeCtx.userDetails])
   let userRoutes = (
-    <div>
+    <>
         <Route path='/' exact>
           <MainPage/>
         </Route>
@@ -44,11 +47,20 @@ function App() {
         <Route path='/orders'>
           <Orders/>
         </Route>
-    </div>
+        <Route path='/product/:productId'>
+          <ProductDetail/>
+        </Route>
+        <Route path='/category/:categoryId'>
+          <CategoryDetail/>
+        </Route>
+        <Route path='/*' exact>
+          <Redirect to='/'/>
+        </Route>
+    </>
   )
   let authRoutes = (
-    <div>
-      <Route path='/'>
+    <>
+      <Route path='/*' exact>
         <Redirect to='/signin'/>
       </Route>
       <Route path='/signin'>
@@ -57,7 +69,7 @@ function App() {
       <Route path='/signup'>
         <SignUp/>
       </Route>
-    </div>
+    </>
   )
   return (
     <div className="App">
@@ -65,9 +77,6 @@ function App() {
             {storeCtx.isSigned?<Header/>:null}
             <Switch>
               {storeCtx.isSigned? userRoutes:authRoutes}
-              <Route path='/*'>
-                <Redirect to='/'/>
-              </Route>
             </Switch>
       </BrowserRouter>
     </div> 

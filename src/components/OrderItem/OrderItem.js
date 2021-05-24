@@ -17,7 +17,7 @@ const OrderItem =(props)=>{
                 <div className="flex mt-5">
                     <div className="font-roboto font-bold text-xs text-gray-500 flex justify-start">Ordered on:<span className="mx-1 font-normal">{props.orderedDate}</span></div>
                 </div>
-                    <div className="font-roboto text-lg text-gray-500 flex flex-col justify-end p-2">${props.price}</div>
+                    <div className="font-roboto text-lg text-gray-500 flex flex-col text-right p-2">${props.price}</div>
             </div>  
         </article>
     )
