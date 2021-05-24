@@ -1,5 +1,5 @@
 import React,{ useCallback, useEffect, useState} from 'react'
-import DUMMY_PRODUCTS from '../DummyData'
+// import {DUMMY_PRODUCTS} from '../DummyData'
 
 const authToken = "EioAXuvhQ4iYkqg1tb85vOD6iMVkTL2vlaQuWplR"
 
@@ -54,6 +54,7 @@ export const StoreContextProvider = (props)=>{
     // }
 
     const checkUserHandler=useCallback(()=>{    
+        // onAddHandler()
         if(localStorage.getItem('token')!==null){
             setUserId(localStorage.getItem('userId'))
             setToken(localStorage.getItem('token'))
@@ -62,7 +63,6 @@ export const StoreContextProvider = (props)=>{
     },[setUserId,setToken,setIsSignIn])
 
     const addToCartHandler =(item)=>{
-        // onAddHandler()
         let dupCart = cart
         const itemIndex = dupCart.findIndex(ele=>ele.id===item.id)
         if(itemIndex!==-1){
