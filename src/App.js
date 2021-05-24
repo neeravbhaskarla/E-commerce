@@ -13,6 +13,9 @@ import ProductDetail from './components/ProductDetail/ProductDetail'
 import CategoryDetail from './components/CategoryDetail/CategoryDetail'
 import { useEffect } from 'react';
 import {StoreContext} from './store/use-context'
+import SearchResults from './containers/SearchResults';
+
+
 function App() {
   const storeCtx = useContext(StoreContext)
   useEffect(()=>{
@@ -54,6 +57,9 @@ function App() {
         </Route>
         <Route path='/category/:categoryId'>
           <CategoryDetail/>
+        </Route>
+        <Route path="/search/:searchKey">
+          <SearchResults/>
         </Route>
         <Route path='/*' exact>
           <Redirect to='/'/>
