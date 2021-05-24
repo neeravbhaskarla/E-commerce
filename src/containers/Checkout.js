@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useEffect, useCallback} from 'react'
+import React, { Fragment, useContext, useEffect} from 'react'
 import {useHistory} from 'react-router'
 import CloseIcon from '@material-ui/icons/Close'
 import {StoreContext} from '../store/use-context'

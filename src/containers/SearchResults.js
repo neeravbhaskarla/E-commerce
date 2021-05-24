@@ -20,13 +20,14 @@ const SearchResults = () =>{
                         inStock={product.inStock} 
                         description={product.description}/>)
             }
+            return null
         })
     ))
 
     return(
         <div>
             <div className="flex flex-row flex-wrap justify-center overflow-x-hidden">
-                {Object.keys(mainProducts).length===0 && mainProducts?<p>no Search Results</p>:mainProducts}    
+                {mainProducts}    
             </div>
         </div>
     )

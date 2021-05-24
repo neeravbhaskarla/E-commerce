@@ -1,4 +1,4 @@
-import React,{ useCallback, useEffect, useState} from 'react'
+import React,{ useCallback, useState} from 'react'
 // import {DUMMY_PRODUCTS} from '../DummyData'
 
 const authToken = "EioAXuvhQ4iYkqg1tb85vOD6iMVkTL2vlaQuWplR"

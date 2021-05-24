@@ -1,4 +1,4 @@
-import React, { useContext,useEffect } from 'react'
+import React, { useContext } from 'react'
 import OrderItem from '../components/OrderItem/OrderItem'
 import {StoreContext} from '../store/use-context'
 const Orders = () =>{

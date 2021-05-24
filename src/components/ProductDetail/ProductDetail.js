@@ -53,7 +53,7 @@ const ProductDetail = ()=>{
                         </div>
             </div>
             <div>
-                <img src={product.img} className="" style={{width: '50vw', height:'70vh'}}/>
+                <img src={product.img} className="" alt="" style={{width: '50vw', height:'70vh'}}/>
             </div>
         </div>
     )

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import UserProfile from '../assets/svg/profile.svg'
 import LogoutIcon from '@material-ui/icons/ExitToApp'
 import {Link, useHistory} from 'react-router-dom'
