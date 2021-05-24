@@ -27,9 +27,11 @@ function App() {
     getData()
     storeCtx.checkStatus()
   },[storeCtx.isSigned])
+
   useEffect(()=>{
     storeCtx.fetchOrders()
   },[storeCtx.userDetails])
+
   let userRoutes = (
     <>
         <Route path='/' exact>

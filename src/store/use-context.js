@@ -139,7 +139,8 @@ export const StoreContext = React.createContext({
     fetchOrders: () =>{},
     placeOrder: ()=>{},
     incQuantity: (item)=>{},
-    decQuantity: (item)=>{}
+    decQuantity: (item)=>{},
+    calucateRemainingTime: (expTime)=>{}
 })
 export const StoreContextProvider = (props)=>{
     const [items, setItemsState] = useState({})
@@ -150,7 +151,6 @@ export const StoreContextProvider = (props)=>{
     const [uId, setUserId] = useState('')
     const [token, setToken] = useState('')
     const [orders, setOrders] = useState([])
-    const [expTime, setexpTime ] = useState('')
 
 
     // const onAddHandler =()=>{
@@ -165,14 +165,15 @@ export const StoreContextProvider = (props)=>{
     //       }
     //     getData()
     // }
-    const checkUserHandler=useCallback(()=>{
+
+    const checkUserHandler=useCallback(()=>{    
         if(localStorage.getItem('token')!==null){
-            setexpTime(localStorage.getItem('expirationTime'))
             setUserId(localStorage.getItem('userId'))
             setToken(localStorage.getItem('token'))
             setIsSignIn(true)
         }
     },[setUserId,setToken,setIsSignIn])
+
     const addToCartHandler =(item)=>{
         // onAddHandler()
         let dupCart = cart
@@ -249,7 +250,6 @@ export const StoreContextProvider = (props)=>{
         setIsSignIn(false)
         setUserId('')
         setToken('')
-        setexpTime ('')
     }
 
     const signInHandler = useCallback((value)=>{
@@ -330,6 +330,15 @@ export const StoreContextProvider = (props)=>{
         }
         return
     }
+    const calucateRemainingTime=(expirationTime)=>{ // Logout
+        const currentTime = new Date().getTime()
+        const adjExpirationTime = new Date(expirationTime).getTime()
+        const remainingDuration = adjExpirationTime-currentTime
+        setTimeout(()=>{
+            logoutHandler()
+        },remainingDuration)
+    }
+    
     const contextValue ={
         userId: uId,
         token: token,
@@ -353,7 +362,8 @@ export const StoreContextProvider = (props)=>{
         fetchOrders: fetch_orders,
         placeOrder: placeOrderHandler,
         incQuantity: incQuantityHandler,
-        decQuantity: decQuantityHandler 
+        decQuantity: decQuantityHandler,
+        calucateRemainingTime,
     }
     return(
         <StoreContext.Provider value={contextValue}>

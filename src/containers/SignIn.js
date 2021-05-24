@@ -33,9 +33,10 @@ const SignIn = () =>{
             if(!response.ok){
                 throw new Error(data.error.message)
             }
+            const expirationTime = new Date(new Date().getTime() + (+data.expiresIn * 1000) )  //Logout on when expiration time has reached
+            storeCtx.calucateRemainingTime(expirationTime) // using setTimeout in storeCtx it will trigger logout when expiration time is reached
             localStorage.setItem('userId', data.localId)
             localStorage.setItem('token', data.idToken)
-            localStorage.setItem('expirationTime', data.expiresIn)
             storeCtx.getUserData(data.localId)
         }   
         userSignIn()

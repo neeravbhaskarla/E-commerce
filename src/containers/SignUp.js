@@ -38,9 +38,10 @@ const SignUp = () =>{
                 throw new Error("Something went wrong")
             }
             const data = await response.json()
+            const expirationTime = new Date(new Date().getTime() + (+data.expiresIn * 1000) )
+            storeCtx.calucateRemainingTime(expirationTime)
             localStorage.setItem('userId', data.localId)
             localStorage.setItem('token', data.idToken)
-            localStorage.setItem('expirationTime', data.expiresIn)
             await fetch('https://e-commerce-597b0-default-rtdb.firebaseio.com/users.json?auth='+storeCtx.authToken,{
                 method: 'POST',
                 body: JSON.stringify({
