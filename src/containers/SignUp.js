@@ -38,10 +38,10 @@ const SignUp = () =>{
                 throw new Error("Something went wrong")
             }
             const data = await response.json()
-            const expirationTime = new Date(new Date().getTime() + (+data.expiresIn * 1000) )
-            storeCtx.calucateRemainingTime(expirationTime)
-            localStorage.setItem('userId', data.localId)
-            localStorage.setItem('token', data.idToken)
+            // const expirationTime = new Date(new Date().getTime() + (+data.expiresIn * 1000) )
+            // storeCtx.calucateRemainingTime(expirationTime)
+            // localStorage.setItem('userId', data.localId)
+            // localStorage.setItem('token', data.idToken)
             await fetch('https://e-commerce-597b0-default-rtdb.firebaseio.com/users.json?auth='+storeCtx.authToken,{
                 method: 'POST',
                 body: JSON.stringify({
@@ -56,13 +56,13 @@ const SignUp = () =>{
             }).catch(err=>{
                 throw new Error('Data was not sent')
             })
-            storeCtx.getUserData(data.localId)
+            // storeCtx.getUserData(data.localId)
         }
         await fetch_data()
         .then(res=>{
-            storeCtx.setSignIn(true)
             setIsLoading(false)
-            history.push('/')
+            alert('Registered Successfully')
+            history.push('/signin')
         })
         .catch(error=>{
             alert(error.message)
