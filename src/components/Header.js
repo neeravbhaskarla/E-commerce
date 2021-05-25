@@ -6,13 +6,20 @@ import FavIcon from '@material-ui/icons/Favorite'
 import ProfileIcon from '@material-ui/icons/AccountCircle'
 import { Link } from 'react-router-dom'
 import {StoreContext} from '../store/use-context'
+import {useHistory} from 'react-router'
 
 const Header=()=>{
+    const history = useHistory()
     const storeCtx = useContext(StoreContext)
     const [searchKey, setSearchKey] = useState('')
     const onSearchKeyChange = (e) =>{
         setSearchKey(e.target.value)
         // console.log(e.target.value)
+    }
+    const onKeyEnterHandler=(e)=>{
+        if(e.key==="Enter"){
+            history.push(`/search/${searchKey}`)
+        }
     }
     return (
         <nav className='bg-black h-14 flex justify-between items-center font-sans'>
@@ -21,7 +28,7 @@ const Header=()=>{
             </Link>
             <div className='flex flex-end space-x-7 transition-color mr-3'>
                 <div className='flex items-center border-2 rounded-md space-between font-sans'>
-                    <input type="text" className='h-9 px-2 text-sm w-80 text-gray-500' onChange={onSearchKeyChange}/>
+                    <input type="text" className='h-9 px-2 text-sm w-80 text-gray-500' onChange={onSearchKeyChange} onKeyPress={onKeyEnterHandler}/>
                     <Link to={`/search/${searchKey}`}>
                         <SearchIcon className='bg-gray-100 w-full h-12 px-1 hover:bg-gray-300' style={{height: "36px"}}/>
                     </Link>

@@ -8,7 +8,7 @@ const SearchResults = () =>{
     const storeCtx = useContext(StoreContext)
     const mainProducts = Object.keys(storeCtx.items).map(item=>(
         [...storeCtx.items[item]].map(product=>{
-            if(product.title.toLowerCase().includes(params.searchKey) || product.description.toLowerCase().includes(params.searchKey)){
+            if(product.title.toLowerCase().split(/\s+/).includes(params.searchKey) || product.keywords.toLowerCase().split(/\s+/).includes(params.searchKey)){
                 return(
                     <ProductItem key={product.id} 
                         item={product}

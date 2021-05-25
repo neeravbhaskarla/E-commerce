@@ -7,6 +7,7 @@ export const DUMMY_PRODUCTS = {
                 img: 'https://impressivenotebook.com/wp-content/uploads/2020/09/Lenovo-IdeaCentre-AIO-3i-F0EU0033US.jpg',
                 price: 499,
                 inStock: true,
+                keywords: 'computer computers cpu processors processor',
                 description: 'With its sleek, modern stand and thin bezel display, the IdeaCentre A340 is designed to catch the eye. Fire it up and marvel at the way it handles everything with ease, quickly and smoothly. Even with the space-saving design, it can store plenty, too. This all-in-one makes the ideal home PC.',
             },
             {
@@ -16,6 +17,7 @@ export const DUMMY_PRODUCTS = {
                 img: 'https://i.dell.com/sites/csimages/Video_Imagery/all/optiplex-aio-thumbnail.png',
                 price: 299,
                 inStock: true,
+                keywords: 'computer computers cpu processors processor',
                 description: 'All Amazon Renewed purchases will come with accessories that may be not be original, but will be compatible and fully functional. Amazon Renewed ducts will be packaged in either original packaging or in a new and clean cardboard box. duct will be clean and may have a few visible signs of earlier use.',
             },
             {
@@ -25,6 +27,7 @@ export const DUMMY_PRODUCTS = {
                 img: 'https://images-na.ssl-images-amazon.com/images/I/71vNrx05QFL._SL1500_.jpg',
                 price: 229,
                 inStock: true ,
+                keywords: 'computer computers cpu processors processor',
                 description: 'Zebronics Slim Desktop Computer Intel Core i3-4130 /8GB RAM / 500GB HDD/WiFi Ready 19" HD Led Monitor with Keyboard Mouse',
             },
             {
@@ -34,6 +37,7 @@ export const DUMMY_PRODUCTS = {
                 img: 'https://i2.wp.com/nakodaithub.com/wp-content/uploads/2021/03/61WhHoPNAlL._SL1080_.jpg?fit=1080%2C1080&ssl=1',
                 price: 299,
                 inStock: true ,
+                keywords: 'computer computers cpu processors processor',
                 description: 'Ant Esports ICE-130AG Mid Tower Computer Case I Gaming Cabinet Supports ATX, Micro-ATX, Mini-ITX Motherboard with 1 x 120 mm Rear Fan Preinstalled - Black',
             },
             {
@@ -43,6 +47,7 @@ export const DUMMY_PRODUCTS = {
                 img: 'https://images-na.ssl-images-amazon.com/images/I/81grtcmxsyL._SL1500_.jpg',
                 price: 6,
                 inStock: true ,
+                keywords: 'speakers',
                 description: 'Revolutionizing technology for the masses, incorporating Excellence, Quality and Reliability in products range, be it Soundbars, Home Theatres, Headphones, Earphones, TWS, Gaming Cabinets',
             },
             {
@@ -52,6 +57,7 @@ export const DUMMY_PRODUCTS = {
                 img: 'https://images-na.ssl-images-amazon.com/images/I/61yo4swj-PL._SY450_.jpg',
                 price: 29,
                 inStock: true ,
+                keywords: 'webcam camera webcams cameras',
                 description: 'The Logitech C270 HD Webcam makes video calling seamless, compatible with PC, Mac and ChromeOS platforms - as well as Skype, Google Hangouts and FaceTime.',
             },
             {
@@ -61,6 +67,7 @@ export const DUMMY_PRODUCTS = {
                 img: 'https://www.kindpng.com/picc/m/592-5922361_pen-drive-sandisk-8gb-png-sandisk-cruzer-blade.png',
                 price: 3,
                 inStock: true ,
+                keywords: 'pendrive pendrives flashdrives storage memory externaldrive',
                 description: 'The SanDisk 16GB Cruzer Blade USB Flash Drive from SanDisk is a compact, portable USB flash drive. It allows you to carry and transfer files on the go like photos, videos or music',
             },
             {
@@ -70,6 +77,7 @@ export const DUMMY_PRODUCTS = {
                 img: 'https://images-na.ssl-images-amazon.com/images/I/71bV203ASmL._SL1500_.jpg',
                 price: 5,
                 inStock: true ,
+                keywords: 'pendrive pendrives flashdrives storage memory externaldrive',
                 description: 'The SanDisk Ultra Dual Drive m3.0 makes it easy to transfer content from your phone to your computer.',
             },
             {
@@ -79,6 +87,7 @@ export const DUMMY_PRODUCTS = {
                 img: 'https://www.notebookcheck.net/fileadmin/Notebooks/News/_nc3/ideapad.jpeg',
                 price: 830,
                 inStock: true ,
+                keywords: 'laptops laptop',
                 description: 'The new Lenovo IdeaPad™ 5i boasts an enticing list of features, making it a powerful combination of performance, connectivity, and entertainment with 11th Generation Intel® Core™ processors.',
             },
             {
@@ -88,6 +97,7 @@ export const DUMMY_PRODUCTS = {
                 img: 'https://www.notebookcheck.net/fileadmin/Notebooks/Asus/VivoBook_14_X412FJ-EB023T/4zu3_Asus_Vivobook_14_X412FJ.jpg',
                 price: 240,
                 inStock: true ,
+                keywords: 'laptops laptop',
                 description: 'ASUS VivoBook 14 is the entry-level laptop that delivers powerful performance and immersive visuals. Its NanoEdge display and a matte anti-glare coating for a truly engaging experience.',
             },
             {
@@ -97,6 +107,7 @@ export const DUMMY_PRODUCTS = {
                 img: 'https://i.pinimg.com/originals/c5/06/d9/c506d9ebf0629039d9a81c90dcb9b42c.jpg',
                 price: 883,
                 inStock: true ,
+                keywords: 'laptops laptop',
                 description: 'The incredibly thin and light MacBook Air features a brilliant Retina display with True Tone techology',
             },
             {
@@ -106,6 +117,7 @@ export const DUMMY_PRODUCTS = {
                 img: 'https://mk0soundguyshosprmrt.kinstacdn.com/wp-content/uploads/2019/07/Sony-WHXB900N-6.jpg',
                 price: 169,
                 inStock: true ,
+                keywords: 'headphones earphones headphone earphone',
                 description: 'The WH-XB900N is Wireless Extra Bass and Noise Cancellation Headphones with Quick Attention Mode, Touch Sensor, Sense Engine and Built-In Alexa. Hear e bass and don’t let the noise stop you.',
             },
             {
@@ -115,6 +127,7 @@ export const DUMMY_PRODUCTS = {
                 img: 'https://media.kingston.com/hyperx/product/hx-product-keyboard-alloy-origins-us-1-zm-lg.jpg',
                 price: 89,
                 inStock: true ,
+                keywords: 'keyboard mechanicalkeyboard',
                 description: 'The HyperX Alloy Origins Core is an ultra-compact, sturdy tenkeyless keyboard featuring custom HyperX mechanical switches designed to give gamers the best blend of style, performance, and reliability.',
             },
             {
@@ -124,6 +137,7 @@ export const DUMMY_PRODUCTS = {
                 img: 'https://i.pinimg.com/originals/1a/17/73/1a177399a534dbd3cbe37e2ea35d5ada.jpg',
                 price: 58,
                 inStock: true ,
+                keywords: 'mouse mouses opticalmouse',
                 description: 'With over 10 million Razer DeathAdders sold, the most celebrated and awarded gaming mouse in the world has earned its popularity through its exceptional ergonomic design',
             },
         ],
@@ -135,7 +149,8 @@ export const DUMMY_PRODUCTS = {
                 img: 'https://fdn2.gsmarena.com/vv/pics/google/google-pixel-4a-1.jpg',
                 price: 799,
                 inStock: true,
-                description: 'Meet Pixel 4a, the helpful Google phone at a helpful price. It comes packed with the things you want most in a phone, like a camera that takes great low-light photos, a battery that lasts up to 24 hours,[1] and the new Google Assistant. And it’s an unlocked smartphone, so you can choose the data plan and carrier that work for you.',
+                keywords: 'mobiles mobile phones phones mobilephones mobilephone',
+                description: 'Meet Pixel 4a, the helpful Google phone at a helpful price. It comes packed with the things you want most in a phone, like a camera that takes great low-light photos',
             },
             {
                 id:'Mobiles_2',
@@ -144,7 +159,8 @@ export const DUMMY_PRODUCTS = {
                 img: 'https://oasis.opstatics.com/content/dam/oasis/page/billie/N100-Frame.png',
                 price: 179,
                 inStock: false,
-                description: 'OnePlus Nord N100 comes with a big display, big battery, and big storage at an affordable price. It sports a 6.52” immersive display with the power of dual stereo speakers. For long battery life, OnePlus Nord 100 is powered by a 5000mAh battery and supports 18W fast charge. It also comes with 4GB of RAM with 64 GB of storage.',
+                keywords: 'mobiles mobile phones phones mobilephones mobilephone',
+                description: 'OnePlus Nord N100 comes with a big display, big battery, and big storage at an affordable price. It sports a 6.52” immersive display with the power of dual stereo speakers',
             },
             {
                 id:'Mobiles_3',
@@ -153,7 +169,8 @@ export const DUMMY_PRODUCTS = {
                 img: 'https://fdn.gsmarena.com/imgroot/news/20/12/samsung-galaxy-s21-renders/-1200/gsmarena_004.jpg',
                 price: 699,
                 inStock: true ,
-                description: 'Life is a series of moments. Why not make them beautiful? Take your photos and videos to an incredible new level with multiple, cutting-edge ways to capture life exactly as it is, or turn it into a work of art. With a sleek, new design, hyperfast processing and a battery that wont give out on you when you need it most, Samsung Galaxy S21 smart phone lets you get creative, stay connected and do it all your way.',
+                keywords: 'mobiles mobile phones phones mobilephones mobilephone',
+                description: 'Life is a series of moments. Why not make them beautiful? Take your photos and videos to an incredible new level with multiple, cutting-edge ways to capture life exactly as it is',
             },
             {
                     id:'Mobiles_4',
@@ -162,6 +179,7 @@ export const DUMMY_PRODUCTS = {
                     img: 'https://images-na.ssl-images-amazon.com/images/I/61YSMhOd5EL._SX679_.jpg',
                     price: 899,
                     inStock: true ,
+                    keywords: 'mobiles mobile phones phones mobilephones mobilephone',
                     description: 'OnePlus 8 Pro Onyx Black,? 5G Unlocked Android Smartphone U.S Version, 12GB RAM+256GB Storage, 120Hz Fluid Display,Quad Camera, Wireless Charge, with Alexa Built-in',
 
             },
@@ -172,6 +190,7 @@ export const DUMMY_PRODUCTS = {
                     img: 'https://fdn2.gsmarena.com/vv/pics/nokia/nokia-34-2.jpg',
                     price: 169,
                     inStock: true ,
+                    keywords: 'mobiles mobile phones phones mobilephones mobilephone',
                     description: 'Upgrade to more phone and more power with Nokia 3.4. Maximize your streaming, binging and work on a 6.39-inch HD+ screen--with punch hole display that gives you even more screen real estate. Dont sweat running out of juice with 2-day battery life.'
             },
             {
@@ -181,7 +200,8 @@ export const DUMMY_PRODUCTS = {
                     img: 'https://fdn2.gsmarena.com/vv/pics/samsung/samsung-galaxy-a10s-1.jpg',
                     price: 131,
                     inStock: true ,
-                    description: 'Built for ImmersionA 15.79cm (6.2) HD+ immersive screen with an Infinity-V display that lets you binge-watch at ease and level-up your gaming. Built for DepthClick incredible pictures and shoot amazing videos with a 13MP + 2MP (Depth) dual-camera set-up. Built to LastA 4000mAh battery that goes on and on and on so that you get to do more. '
+                    keywords: 'mobiles mobile phones phones mobilephones mobilephone',
+                    description: 'Built for ImmersionA 15.79cm (6.2) HD+ immersive screen with an Infinity-V display that lets you binge-watch at ease and level-up your gaming.'
             },
             {
                     id:'Mobiles_7',
@@ -190,7 +210,8 @@ export const DUMMY_PRODUCTS = {
                     img: 'https://fdn2.gsmarena.com/vv/pics/samsung/samsung-galaxy-s20-5g-r1.jpg',
                     price: 59,
                     inStock: true ,
-                    description: 'We get you. The standout in the crowd, the one with relentless passion. The one that stays true to yourself and connected to those around you. You deserve a cellphone that delivers industry-leading tech and allows you to express yourself in ways you choose.'
+                    keywords: 'mobiles mobile phones phones mobilephones mobilephone',
+                    description: 'We get you. The standout in the crowd, the one with relentless passion. The one that stays true to yourself and connected to those around you.'
             },
             {
                     id:'Mobiles_8',
@@ -199,6 +220,7 @@ export const DUMMY_PRODUCTS = {
                     img: 'https://fdn2.gsmarena.com/vv/pics/oneplus/oneplus-8t-lunar.jpg',
                     price: 599,
                     inStock: true ,
+                    keywords: 'mobiles mobile phones phones mobilephones mobilephone',
                     description: '5G Unlocked Android Smartphone U.S Version, 12GB RAM+256GB Storage, 120Hz Fluid Display,Quad Camera, 65W Ultra Fast Charge, Lunar Silver, U.S Warranty'
             }
         ]

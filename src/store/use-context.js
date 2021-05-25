@@ -13,7 +13,7 @@ export const StoreContext = React.createContext({
     isSigned: null,
     authToken: null,
     orders:[],
-    setUserData:()=>{},
+    setUserData:(id)=>{},
     setSignIn: (value)=>{},
     logOut:()=>{},
     checkStatus: ()=>{},
@@ -129,7 +129,6 @@ export const StoreContextProvider = (props)=>{
     const logoutHandler = () =>{
         localStorage.removeItem('userId')
         localStorage.removeItem('token')
-        localStorage.removeItem('expirationTime')
         setItemsState({})
         setUserDetails({})
         setCartState([])
@@ -153,7 +152,7 @@ export const StoreContextProvider = (props)=>{
                 method: 'POST',
                 body: JSON.stringify({
                     items: cart,
-                    userId: uId,
+                    userId: localStorage.getItem('userId'),
                     address: userDetails.address
                 }),
                 headers:{
