@@ -18,7 +18,7 @@ const Checkout = () =>{
             <h1 className="text-2xl font-poppins mt-10 mb-14 text-center font-semibold">Shopping Cart</h1>
             <div className="flex flex-row justify-between mx-20">
                 <div className="flex flex-col space-y-5" style={{width: '50vw'}}>
-                    {storeCtx.cart.map(item=>(
+                    {storeCtx.cart.length!==0?storeCtx.cart.map(item=>(
                         <Order key={item.id} 
                             id={item.id}
                             item={item}
@@ -28,7 +28,7 @@ const Checkout = () =>{
                             img={item.img} 
                             quantity={item.quantity}
                             price={item.price}/>
-                    ))}
+                    )):<div className="mt-14 font-lg font-roboto text-red-600">Cart is Empty</div>}
                 </div>
                 <div className="flex flex-col p-10 space-y-8 font-roboto" style={{border: '1px solid #ccc', height: '400px'}}>
                         <h1 className="flex items-start font-semibold text-lg">ORDER OVERVIEW</h1>
