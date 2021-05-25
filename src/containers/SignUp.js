@@ -12,7 +12,7 @@ const SignUp = () =>{
     const [isPasswordSame, setPasswordSame] = useState(null)
     const [isFocus, setIsFocus] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
-    const formSubmissionHandler= (event)=>{
+    const formSubmissionHandler= async(event)=>{
         event.preventDefault()
         const name = nameRef.current.value
         const email = emailRef.current.value
@@ -58,13 +58,16 @@ const SignUp = () =>{
             })
             storeCtx.getUserData(data.localId)
         }
-        fetch_data().catch(error=>{
+        await fetch_data()
+        .then(res=>{
+            storeCtx.setSignIn(true)
+            setIsLoading(false)
+            history.push('/')
+        })
+        .catch(error=>{
             alert(error.message)
             return
         })
-        storeCtx.setSignIn(true)
-        setIsLoading(false)
-        history.push('/')
     }
     const passwordChangeHandler=(event)=>{
         setPassword(event.target.value)
